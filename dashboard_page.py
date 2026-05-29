@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
+from zoneinfo import ZoneInfo
+
 
 from sensors import get_sensor_data
 from rules import get_plant_status
@@ -19,9 +21,13 @@ def DashPage():
 )
 
     st.title("🌱 Smart Planter Dashboard")
+
+    current_time = datetime.now(
+    ZoneInfo("Asia/Kolkata")
+)
     st.caption(
-    f"Last Updated: {datetime.now().strftime('%H:%M:%S')}"
-    )
+    f"Last Updated: {current_time.strftime('%H:%M:%S')}"
+)
 
     col1, col2, col3 = st.columns(3)
 
