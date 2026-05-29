@@ -1,11 +1,16 @@
 import streamlit as st
 from datetime import datetime
+from streamlit_autorefresh import st_autorefresh
+
 from sensors import get_sensor_data
 from rules import get_plant_status
 
 
 def DashPage():
     
+    # Refresh every 5 seconds
+    st_autorefresh(interval=5000, key="refresh")
+
     data = get_sensor_data()
 
     status = get_plant_status(
