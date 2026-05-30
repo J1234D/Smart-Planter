@@ -13,7 +13,6 @@ def DashPage():
 
     response = requests.get("https://apiforsmartplanter.onrender.com/sensor_readings")
     data = response.json()
-    st.write(data)
 
     status = get_plant_status(
     data["moisture"],
