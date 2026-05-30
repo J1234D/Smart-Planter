@@ -17,7 +17,7 @@ Timestamped Readings
 
 Sensor data is sent securely to a cloud-based API, where it is processed and stored for analysis. The dashboard provides live monitoring, historical trends, and insights to help users understand their plant's growing conditions.
 
-###Features
+### Features
 
 ✅ Real-Time Sensor Monitoring
 
