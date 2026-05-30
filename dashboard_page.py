@@ -21,9 +21,10 @@ def DashPage():
 
     st.title("🌱 Smart Planter Dashboard")
 
-    current_time = datetime.now(
+    """current_time = datetime.now(
     ZoneInfo("Asia/Kolkata")
-)
+)"""
+    current_time = datetime.fromtimestamp(data["timestamp"])
     st.caption(
     f"Last Updated: {current_time.strftime('%H:%M:%S')}"
 )
