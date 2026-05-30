@@ -17,7 +17,7 @@ Timestamped Readings
 
 Sensor data is sent securely to a cloud-based API, where it is processed and stored for analysis. The dashboard provides live monitoring, historical trends, and insights to help users understand their plant's growing conditions.
 
-Features
+###Features
 
 ✅ Real-Time Sensor Monitoring
 
@@ -31,12 +31,12 @@ Features
 
 Technology Stack
              
--ESP32 Microcontroller
--FastAPI Backend
--Streamlit Dashboard
--Google Sheets Data Storage
--Python
--Project Goal
+- ESP32 Microcontroller
+- FastAPI Backend
+- Streamlit Dashboard
+- Google Sheets Data Storage
+- Python
+- Project Goal
 
 The goal of Smart Planter is to make plant care more accessible by combining sensors, cloud technology, and data visualization into a simple and user-friendly platform.
 
