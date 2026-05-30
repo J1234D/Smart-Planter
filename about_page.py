@@ -4,7 +4,9 @@ def AboutPage():
 
     st.title("About Smart Planter")
 
-    st.write("""
+    col1,col2 = st.columns(2)
+    with col1:
+        st.write("""
 
 Smart Planter is an IoT-based plant monitoring system designed to help users track the health of their plants in real time.
 
@@ -46,3 +48,5 @@ Built with Python, IoT, and a passion for learning.
 
 
 """)
+        with col2:
+            st.image("flowchart.png")
