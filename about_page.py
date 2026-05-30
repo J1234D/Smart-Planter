@@ -2,7 +2,7 @@ import streamlit as st
 
 def AboutPage():
 
-    st.title("About")
+    st.title("About Smart Planter")
 
     st.write("""
 
