@@ -13,6 +13,7 @@ def DashPage():
 
     response = requests.get("https://apiforsmartplanter.onrender.com/sensor_readings")
     data = response.json()
+    st.write(data)
 
     status = get_plant_status(
     data["moisture"],
@@ -39,10 +40,11 @@ def DashPage():
     with col2:
         st.metric("pH", data["ph"])
     
-    st.metric(
-    "☀ Light Status",
-    "☀ Day" if data["is_day"] else "🌙 Night"
-)
+    with col3:
+        st.metric(
+        "☀ Light Status",
+        "☀ Day" if data["is_day"] else "🌙 Night"
+        )
     st.divider()
 
     st.subheader("Plant Status")
