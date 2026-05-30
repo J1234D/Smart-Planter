@@ -39,10 +39,10 @@ def DashPage():
     with col2:
         st.metric("pH", data["ph"])
     
-    with col3:
-        st.metric("☀ Light Status",
-                   "☀ Day" if data["is_day"] == True  else "🌙 Night" )
-
+    st.metric(
+    "☀ Light Status",
+    "☀ Day" if data["is_day"] else "🌙 Night"
+)
     st.divider()
 
     st.subheader("Plant Status")
