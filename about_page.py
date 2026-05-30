@@ -1,11 +1,13 @@
 import streamlit as st
 
 def AboutPage():
-
+    st.image("https://ststephensbirati.in/wp-content/uploads/2021/07/12X-12LOGO_New_2023-768x956.png")
     st.title("About Smart Planter")
 
     col1,col2 = st.columns(2)
+
     with col1:
+
         st.write("""
 
 Smart Planter is an IoT-based plant monitoring system designed to help users track the health of their plants in real time.
