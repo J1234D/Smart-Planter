@@ -1,7 +1,7 @@
 import streamlit as st
 
 def AboutPage():
-    st.image("https://ststephensbirati.in/wp-content/uploads/2021/07/12X-12LOGO_New_2023-768x956.png")
+    st.image("https://ststephensbirati.in/wp-content/uploads/2021/07/12X-12LOGO_New_2023-768x956.png",width=70)
     st.title("About Smart Planter")
 
     col1,col2 = st.columns(2)
