@@ -24,7 +24,9 @@ def DashPage():
     """current_time = datetime.now(
     ZoneInfo("Asia/Kolkata")
 )"""
-    current_time = datetime.fromtimestamp(data["timestamp"])
+    current_time = datetime.fromisoformat(
+    data["timestamp"]
+)
     st.caption(
     f"Last Updated: {current_time.strftime('%H:%M:%S')}"
 )
