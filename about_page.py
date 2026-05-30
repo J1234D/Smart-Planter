@@ -3,7 +3,7 @@ import streamlit as st
 def AboutPage():
     st.image("https://ststephensbirati.in/wp-content/uploads/2021/07/12X-12LOGO_New_2023-768x956.png",width=70)
 
-    st.markdown("""Designed by Students of 
+    st.markdown("""<h2>Designed by Students of </h2>
     <h1 style='text-align: center; color: white;'>
         St. Stephen's School, Birati
     </h1>
