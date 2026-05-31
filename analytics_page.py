@@ -3,9 +3,28 @@ import requests
 import pandas as pd
 from datetime import datetime
 from datetime import timedelta
+from streamlit_autorefresh import st_autorefresh
+
+
+@st.cache_data(ttl=30)
+def load_data():
+    response = requests.get(
+        "https://apiforsmartplanter.onrender.com/history"
+    )
+
+    data = pd.DataFrame(response.json())
+
+    data["timestamp"] = pd.to_datetime(
+        data["timestamp"],
+        format="ISO8601"
+    )
+
+    return data
+
 
 def CreateChart(data,reading,option):
     now = pd.Timestamp.now(tz="Asia/Kolkata")
+    data = data.sort_values("timestamp")
     
     if option == "24 Hours":
             filtered = data[
@@ -36,10 +55,11 @@ def ShowTrend(data, title, reading, key):
 
 def AnalyticsPage():
 
+
+    st_autorefresh(interval=30000, key="analytics_refresh")
     st.title("Analytics")
     st.text("Work is not completed for this page.")
-    response = requests.get("https://apiforsmartplanter.onrender.com/history")
-    data = pd.DataFrame(response.json())
+    data = load_data()
 
     data["timestamp"] = pd.to_datetime(data["timestamp"],  format="ISO8601")
 
