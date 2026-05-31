@@ -9,4 +9,7 @@ def AnalyticsPage():
     data = response.json()
 
     if st.button("Show Data"):
-        st.dataframe(data)
+        dispdata = st.dataframe(data)
+    if st.button("Close"):
+        dispdata.empty()
+        
