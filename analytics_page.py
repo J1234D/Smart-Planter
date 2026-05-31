@@ -172,14 +172,31 @@ def AnalyticsPage():
         == selected_plant
     ]
 
-    latest = plant_data.iloc[-1]
+    # -----------------------------
+# AVERAGE METRICS
+# -----------------------------
 
-    # -----------------------------
-    # TOP METRICS
-    # -----------------------------
+    avg_moisture = (
+        plant_data["moisture"]
+        .mean()
+    )
+
+    avg_ph = (
+        plant_data["ph"]
+        .mean()
+    )
+
+    day_percentage = (
+
+        plant_data["is_day"]
+        .mean()
+
+        * 100
+
+    )
 
     st.subheader(
-        f"🌿 {latest['plant_type'].title()}"
+        f"🌿 {plant_data.iloc[-1]['plant_type'].title()}"
     )
 
     col1, col2, col3 = st.columns(3)
@@ -188,9 +205,9 @@ def AnalyticsPage():
 
         st.metric(
 
-            "💧 Moisture",
+            "💧 Avg Moisture",
 
-            f"{latest['moisture']}%"
+            f"{avg_moisture:.1f}%"
 
         )
 
@@ -198,9 +215,9 @@ def AnalyticsPage():
 
         st.metric(
 
-            "🧪 pH",
+            "🧪 Avg pH",
 
-            latest["ph"]
+            f"{avg_ph:.1f}"
 
         )
 
@@ -208,14 +225,11 @@ def AnalyticsPage():
 
         st.metric(
 
-            "☀ Light Status",
+            "☀ Day Time",
 
-            "☀ Day"
-            if latest["is_day"]
-            else "🌙 Night"
+            f"{day_percentage:.0f}%"
 
-        )
-
+    )
     st.divider()
 
     # -----------------------------
