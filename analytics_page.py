@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+from datetime import datetime
 
 def AnalyticsPage():
 
@@ -12,4 +13,4 @@ def AnalyticsPage():
     with st.expander("📊 Show Historical Data"):
         st.dataframe(data)
 
-    st.line_chart(data=data)
+    st.line_chart(data=data, x = data["moisture"], y = datetime.fromisoformat(data["timestamp"]), x_label="Moisture", y_label="Time")
