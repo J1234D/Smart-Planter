@@ -21,9 +21,6 @@ def DashPage():
 
     st.title("🌱 Smart Planter Dashboard")
 
-    """current_time = datetime.now(
-    ZoneInfo("Asia/Kolkata")
-)"""
     current_time = datetime.fromisoformat(
     data["timestamp"]
 )

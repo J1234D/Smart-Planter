@@ -31,6 +31,10 @@ def AnalyticsPage():
     data = pd.DataFrame(response.json())
         
     with st.expander("📊 Show Historical Data"):
+        display_data = data.copy()
+
+        display_data["timestamp"] = (
+        display_data["timestamp"].dt.strftime("%d-%m-%Y %H:%M"))
         st.dataframe(data)
 
     data["timestamp"] = pd.to_datetime(data["timestamp"],  format="ISO8601")
