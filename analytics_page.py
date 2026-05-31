@@ -38,7 +38,7 @@ def AnalyticsPage():
 
         display_data["timestamp"] = (
         display_data["timestamp"].dt.strftime("%d-%m-%Y %H:%M"))
-        st.dataframe(data)
+        st.dataframe(display_data)
 
     with st.expander("Show Moisture Trend"):
         
