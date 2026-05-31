@@ -56,7 +56,7 @@ def ShowTrend(data, title, reading, key):
 def AnalyticsPage():
 
 
-    st_autorefresh(interval=30000, key="analytics_refresh")
+    st_autorefresh(interval=1000, key="analytics_refresh")
     st.title("Analytics")
     st.text("Work is not completed for this page.")
     data = load_data()
