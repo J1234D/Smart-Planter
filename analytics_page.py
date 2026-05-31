@@ -7,9 +7,15 @@ def AnalyticsPage():
     st.text("Work is not completed for this page.")
     response = requests.get("https://apiforsmartplanter.onrender.com/history")
     data = response.json()
+        
+    if "show_table" not in st.session_state:
+        st.session_state.show_table = False
 
     if st.button("Show Data"):
-        dispdata = st.dataframe(data)
+        st.session_state.show_table = True
+
     if st.button("Close"):
-        dispdata.empty()
-        
+        st.session_state.show_table = False
+
+    if st.session_state.show_table:
+        st.dataframe(data)
