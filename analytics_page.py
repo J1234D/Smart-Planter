@@ -16,6 +16,7 @@ def AnalyticsPage():
     data["timestamp"] = pd.to_datetime(data["timestamp"],  format="ISO8601")
 
     with st.expander("Show Moisture Trend"):
+        
         st.line_chart(
             data=data,
             x="timestamp",
