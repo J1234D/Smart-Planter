@@ -6,21 +6,24 @@ from datetime import timedelta
 from streamlit_autorefresh import st_autorefresh
 
 
-@st.cache_data(ttl=30)
+@st.cache_data(ttl=10)
 def load_data():
-    response = requests.get(
-        "https://apiforsmartplanter.onrender.com/history"
-    )
+    try:
+        response = requests.get(
+            "https://apiforsmartplanter.onrender.com/history"
+        )
+        response.raise_for_status()
 
-    data = pd.DataFrame(response.json())
+        data = pd.DataFrame(response.json())
 
-    data["timestamp"] = pd.to_datetime(
-        data["timestamp"],
-        format="ISO8601"
-    )
+        data["timestamp"] = pd.to_datetime(
+            data["timestamp"],
+            format="ISO8601"
+        )
 
-    return data
-
+        return data
+    except requests.exceptions.RequestException:
+        return None
 
 def CreateChart(data,reading,option):
     now = pd.Timestamp.now(tz="Asia/Kolkata")
@@ -60,6 +63,10 @@ def AnalyticsPage():
     st.title("Analytics")
     st.text("Work is not completed for this page.")
     data = load_data()
+
+    if data is None:
+        st.error("Failed to load data.")
+        return
 
         
     with st.expander("📊 Show Historical Data"):
