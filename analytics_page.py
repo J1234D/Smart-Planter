@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 from datetime import datetime
+from datetime import timedelta
 
 def AnalyticsPage():
 
@@ -17,8 +18,27 @@ def AnalyticsPage():
 
     with st.expander("Show Moisture Trend"):
         
-        st.line_chart(
-            data=data,
-            x="timestamp",
-            y="moisture"
-        )
+        now = pd.Timestamp.now(tz="Asia/Kolkata")
+        option = st.selectbox(
+    "Select Time Range",
+    [
+        "24 Hours",
+        "7 Days",
+        "30 Days"
+    ]
+)
+        if option == "24 Hours":
+            filtered = data[
+        data["timestamp"] >= now - timedelta(hours=24)
+    ]
+
+        elif option == "7 Days":
+            filtered = data[
+        data["timestamp"] >= now - timedelta(days=7)
+    ]
+
+        elif option == "30 Days":
+            filtered = data[
+        data["timestamp"] >= now - timedelta(days=30)
+    ]
+        st.line_chart(filtered.set_index("timestamp")["moisture"])
