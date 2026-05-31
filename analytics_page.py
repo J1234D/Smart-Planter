@@ -56,12 +56,10 @@ def ShowTrend(data, title, reading, key):
 def AnalyticsPage():
 
 
-    st_autorefresh(interval=1000, key="analytics_refresh")
+    st_autorefresh(interval=10000, key="analytics_refresh")
     st.title("Analytics")
     st.text("Work is not completed for this page.")
     data = load_data()
-
-    data["timestamp"] = pd.to_datetime(data["timestamp"],  format="ISO8601")
 
         
     with st.expander("📊 Show Historical Data"):
