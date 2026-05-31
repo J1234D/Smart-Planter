@@ -13,4 +13,11 @@ def AnalyticsPage():
     with st.expander("📊 Show Historical Data"):
         st.dataframe(data)
 
-    st.line_chart(data=data, x = data["moisture"], y = datetime.fromisoformat(data["timestamp"]), x_label="Moisture", y_label="Time")
+    data["timestamp"] = pd.to_datetime(data["timestamp"])
+
+    with st.expander("Show Moisture Trend"):
+        st.line_chart(
+            data=data,
+            x="timestamp",
+            y="moisture"
+        )
