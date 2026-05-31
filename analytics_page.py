@@ -23,6 +23,17 @@ def CreateChart(data,reading,option):
     ]
     st.line_chart(filtered.set_index("timestamp")[reading])
 
+def ShowTrend(data, title, reading, key):
+    with st.expander(title):
+
+        option = st.selectbox(
+            "Select Time Range",
+            ["24 Hours", "7 Days", "30 Days"],
+            key=key
+        )
+
+        CreateChart(data, reading, option)
+
 def AnalyticsPage():
 
     st.title("Analytics")
@@ -40,25 +51,5 @@ def AnalyticsPage():
         display_data["timestamp"].dt.strftime("%d-%m-%Y %H:%M"))
         st.dataframe(display_data)
 
-    with st.expander("Show Moisture Trend"):
-        
-        option_m = st.selectbox(
-    "Select Time Range",
-    [
-        "24 Hours",
-        "7 Days",
-        "30 Days"
-    ], key = 1
-)
-        CreateChart(data,"moisture",option_m)
-    
-    with st.expander("Show pH Trend"):
-        
-         option_p = st.selectbox(
-    "Select Time Range",
-    [
-        "24 Hours",
-        "7 Days",
-        "30 Days"
-    ],key= 2)
-         CreateChart(data,"ph",option_p)
+    ShowTrend(data, "Show Moisture Trend", "moisture", 1)
+    ShowTrend(data, "Show pH Trend", "ph", 2)
