@@ -43,7 +43,7 @@ def AnalyticsPage():
         "24 Hours",
         "7 Days",
         "30 Days"
-    ]
+    ], key = 1
 )
         CreateChart(data,"moisture",option_m)
     
@@ -55,5 +55,5 @@ def AnalyticsPage():
         "24 Hours",
         "7 Days",
         "30 Days"
-    ])
+    ],key= 2)
          CreateChart(data,"ph",option_p)
