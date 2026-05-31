@@ -4,16 +4,9 @@ import pandas as pd
 from datetime import datetime
 from datetime import timedelta
 
-def CreateChart(data,reading):
+def CreateChart(data,reading,option):
     now = pd.Timestamp.now(tz="Asia/Kolkata")
-    option = st.selectbox(
-    "Select Time Range",
-    [
-        "24 Hours",
-        "7 Days",
-        "30 Days"
-    ]
-)
+    
     if option == "24 Hours":
             filtered = data[
         data["timestamp"] >= now - timedelta(hours=24)
@@ -44,8 +37,23 @@ def AnalyticsPage():
 
     with st.expander("Show Moisture Trend"):
         
-        CreateChart(data,"moisture")
+        option_m = st.selectbox(
+    "Select Time Range",
+    [
+        "24 Hours",
+        "7 Days",
+        "30 Days"
+    ]
+)
+        CreateChart(data,"moisture",option_m)
     
     with st.expander("Show pH Trend"):
         
-        CreateChart(data,"ph")
+         option_p = st.selectbox(
+    "Select Time Range",
+    [
+        "24 Hours",
+        "7 Days",
+        "30 Days"
+    ])
+         CreateChart(data,"ph",option_p)
