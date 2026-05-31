@@ -1,16 +1,63 @@
-def get_plant_status(moisture, ph):
+PLANT_RULES = {
+
+    "aloe_vera": {
+
+        "min_moisture": 20,
+        "min_ph": 6.0,
+        "max_ph": 7.5
+
+    },
+
+    "tomato": {
+
+        "min_moisture": 50,
+        "min_ph": 5.5,
+        "max_ph": 6.8
+
+    },
+
+    "rose": {
+
+        "min_moisture": 40,
+        "min_ph": 6.0,
+        "max_ph": 7.0
+
+    }
+}
+
+
+def get_plant_status(
+    plant_type,
+    moisture,
+    ph
+):
+
+    rules = PLANT_RULES[plant_type]
+
     issues = []
 
-    if moisture < 30:
-        issues.append("💧 Needs Water")
+    if moisture < rules["min_moisture"]:
 
-    if ph < 5.5:
-        issues.append("🧪 Soil Too Acidic")
+        issues.append(
+            "💧 Needs Water"
+        )
 
-    elif ph > 7.5:
-        issues.append("🧪 Soil Too Alkaline")
+    if ph < rules["min_ph"]:
+
+        issues.append(
+            "🧪 Soil Too Acidic"
+        )
+
+    elif ph > rules["max_ph"]:
+
+        issues.append(
+            "🧪 Soil Too Alkaline"
+        )
 
     if not issues:
-        issues.append("✅ Healthy")
+
+        issues.append(
+            "✅ Healthy"
+        )
 
     return issues
