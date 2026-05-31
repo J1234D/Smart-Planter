@@ -29,6 +29,9 @@ def AnalyticsPage():
     st.text("Work is not completed for this page.")
     response = requests.get("https://apiforsmartplanter.onrender.com/history")
     data = pd.DataFrame(response.json())
+
+    data["timestamp"] = pd.to_datetime(data["timestamp"],  format="ISO8601")
+
         
     with st.expander("📊 Show Historical Data"):
         display_data = data.copy()
@@ -36,8 +39,6 @@ def AnalyticsPage():
         display_data["timestamp"] = (
         display_data["timestamp"].dt.strftime("%d-%m-%Y %H:%M"))
         st.dataframe(data)
-
-    data["timestamp"] = pd.to_datetime(data["timestamp"],  format="ISO8601")
 
     with st.expander("Show Moisture Trend"):
         
