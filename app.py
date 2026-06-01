@@ -116,11 +116,9 @@ if st.session_state.user is None:
 
                 st.rerun()
 
-            except:
+            except Exception as e:
 
-                st.error(
-                    "Invalid email or password"
-                )
+                 st.error(e)
 
     # -----------------------------
     # SIGN UP
@@ -144,11 +142,9 @@ if st.session_state.user is None:
                     "Account created successfully!"
                 )
 
-            except:
+            except Exception as e:
 
-                st.error(
-                    "Failed to create account"
-                )
+                 st.error(e)
 
     st.stop()
 
