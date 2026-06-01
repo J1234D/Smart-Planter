@@ -52,7 +52,7 @@ Built with Python, IoT, and a passion for learning.
 
 """)
         with col1:
-            st.image("flowchart.png",width=500)
+            st.image("flowchart.png",width=1000)
 
     st.markdown("""<h2>Designed by Students of </h2>
     <h1 style='text-align: center; color: white;'>
