@@ -4,7 +4,7 @@ from streamlit_option_menu import (
     option_menu
 )
 
-from streamlit_firebase_auth import Authenticate
+from streamlit_firebase_auth import FirebaseAuth
 
 from dashboard_page import DashPage
 from analytics_page import AnalyticsPage
@@ -51,7 +51,7 @@ config = {
 # AUTHENTICATION
 # -----------------------------
 
-authenticator = Authenticate(config)
+authenticator = FirebaseAuth(config)
 
 user = authenticator.login()
 
