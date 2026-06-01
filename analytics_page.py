@@ -30,7 +30,9 @@ def load_data():
 
         return data
 
-    except requests.exceptions.RequestException:
+    except Exception as e:
+
+        st.error(e)
 
         return None
 
