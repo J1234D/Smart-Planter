@@ -1,69 +1,157 @@
 import streamlit as st
 
+
 def AboutPage():
-    st.image("https://ststephensbirati.in/wp-content/uploads/2021/07/12X-12LOGO_New_2023-768x956.png",width=70)
-    
-    st.title("About Smart Planter")
 
-    col1,col2 = st.columns(2)
+    st.image(
+        "https://ststephensbirati.in/wp-content/uploads/2021/07/12X-12LOGO_New_2023-768x956.png",
+        width=70
+    )
 
-    with col1:
+    st.title("🌱 About Smart Planter")
 
-        st.write("""
+    st.write("""
 
-Smart Planter is an IoT-based plant monitoring system designed to help users track the health of their plants in real time.
+Smart Planter is an IoT-based plant monitoring and analytics system designed to help users monitor plant health in real time using sensors, cloud computing, and interactive data visualization.
 
-The system collects environmental data from sensors connected to an ESP32 microcontroller, including:
+The system uses multiple ESP32 microcontrollers connected to environmental sensors to continuously collect important plant health data such as:
 
-Soil Moisture
-Soil pH
-Day/Night Status
-Timestamped Readings
+• Soil Moisture  
+• Soil pH  
+• Day/Night Status  
+• Timestamped Sensor Readings  
 
-Sensor data is sent securely to a cloud-based API, where it is processed and stored for analysis. The dashboard provides live monitoring, historical trends, and insights to help users understand their plant's growing conditions.
+The sensor data is securely transmitted to a FastAPI cloud backend, where it is processed, analyzed, and stored in Firebase Firestore for historical tracking and analytics.
 
-### Features
+The Streamlit dashboard provides a modern interface for:
 
-✅ Real-Time Sensor Monitoring
+✅ Real-Time Plant Monitoring  
+✅ Multi-Plant Management  
+✅ Historical Data Visualization  
+✅ Plant Health Alerts  
+✅ Cloud-Based Data Storage  
+✅ Interactive Analytics Charts  
+✅ Mobile Notifications using ntfy  
 
-✅ Historical Data Tracking
+━━━━━━━━━━━━━━━━━━━━━━
 
-✅ Cloud-Based Data Storage
+## 🧠 System Architecture
 
-✅ Interactive Dashboard
+The Smart Planter architecture consists of:
 
-✅ Plant Health Insights
+ESP32 Devices  
+↓  
+FastAPI Backend (Render Cloud)  
+↓  
+Firebase Firestore Database  
+↓  
+Streamlit Dashboard & Analytics  
+↓  
+Mobile Notification System  
 
-Technology Stack
-             
-- ESP32 Microcontroller
-- FastAPI Backend
-- Streamlit Dashboard
-- Google Sheets Data Storage
-- Python
-- Project Goal
+The project supports multiple plants simultaneously using unique plant IDs and plant-specific monitoring rules.
 
-The goal of Smart Planter is to make plant care more accessible by combining sensors, cloud technology, and data visualization into a simple and user-friendly platform.
+Each plant maintains:
 
-This project demonstrates the integration of IoT hardware, web development, APIs, cloud storage, and data analytics in a practical real-world application.
+• Independent live data  
+• Separate historical records  
+• Individual alerts and analytics  
+• Plant-specific health rules  
 
-Built with Python, IoT, and a passion for learning.
+━━━━━━━━━━━━━━━━━━━━━━
 
+## 📊 Analytics Features
+
+The analytics system allows users to:
+
+• View Moisture Trends  
+• View pH Trends  
+• Filter Historical Data  
+• Analyze Average Readings  
+• Monitor Long-Term Plant Health  
+
+Time-based filtering includes:
+
+• Last 24 Hours  
+• Last 7 Days  
+• Last 30 Days  
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+## 🔔 Smart Alert System
+
+The backend continuously checks sensor data against plant-specific rules.
+
+If abnormal conditions are detected, the system automatically sends mobile alerts such as:
+
+⚠ Plant Needs Water  
+🧪 Soil Too Acidic  
+🧪 Soil Too Alkaline  
+
+Notifications include:
+
+• Plant ID  
+• Plant Type  
+• Alert Message  
+• Timestamp  
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+## 🛠 Technology Stack
+
+• ESP32 Microcontroller  
+• FastAPI Backend  
+• Firebase Firestore  
+• Streamlit Dashboard  
+• Python  
+• ntfy Notification System  
+• IoT Sensor Integration  
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+## 🎯 Project Goal
+
+The goal of Smart Planter is to make plant care smarter, more accessible, and data-driven by combining IoT hardware, cloud technologies, APIs, analytics, and real-time monitoring into a unified platform.
+
+This project demonstrates practical integration of:
+
+• IoT Systems  
+• Backend Development  
+• Cloud Databases  
+• Real-Time APIs  
+• Data Analytics  
+• Dashboard Development  
+• Multi-Device Architecture  
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+Built with Python, IoT, cloud technologies, and a passion for learning.
 
 """)
-    st.subheader(
-    "System Architecture"
-)
 
-    st.image("flowchart.png", use_container_width=True)
-    
-    st.markdown("""<h2>Designed by Students of </h2>
-    <h1 style='text-align: center; color: white;'>
-        St. Stephen's School, Birati
-    </h1>
-    <h3 style='text-align: center; color: white;'>
-        KOLKATA, WEST BENGAL, INDIA
-    </h3>
-    """,
-    unsafe_allow_html=True
-)
+    st.subheader(
+        "System Architecture"
+    )
+
+    st.image(
+        "flowchart.png",
+        use_container_width=True
+    )
+
+    st.markdown(
+        """
+<h2 style='text-align: center;'>
+Designed by Students of
+</h2>
+
+<h1 style='text-align: center; color: white;'>
+St. Stephen's School, Birati
+</h1>
+
+<h3 style='text-align: center; color: white;'>
+KOLKATA, WEST BENGAL, INDIA
+</h3>
+""",
+        unsafe_allow_html=True
+    )
+
