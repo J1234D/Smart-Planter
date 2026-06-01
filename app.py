@@ -1,19 +1,17 @@
 import streamlit as st
+import pyrebase
 
 from streamlit_option_menu import (
     option_menu
 )
 
-from streamlit_firebase_auth import FirebaseAuth
-
 from dashboard_page import DashPage
 from analytics_page import AnalyticsPage
 from about_page import AboutPage
 
-
-# -----------------------------
+# -----------------------------------
 # PAGE CONFIG
-# -----------------------------
+# -----------------------------------
 
 st.set_page_config(
 
@@ -25,9 +23,9 @@ st.set_page_config(
 
 )
 
-# -----------------------------
+# -----------------------------------
 # FIREBASE CONFIG
-# -----------------------------
+# -----------------------------------
 
 config = {
 
@@ -41,35 +39,120 @@ config = {
 
     "messagingSenderId": "1076034199324",
 
-    "appId": "1:1076034199324:web:0ecb27cb7a81295cec24d9",
-
-    "measurementId": "G-QKNV76E891"
+    "appId": "1:1076034199324:web:0ecb27cb7a81295cec24d9"
 
 }
 
-# -----------------------------
-# AUTHENTICATION
-# -----------------------------
+# -----------------------------------
+# FIREBASE INIT
+# -----------------------------------
 
-authenticator = FirebaseAuth(config)
+firebase = pyrebase.initialize_app(
+    config
+)
 
-user = authenticator.check_session()
+auth = firebase.auth()
 
-# -----------------------------
-# LOGIN CHECK
-# -----------------------------
+# -----------------------------------
+# SESSION STATE
+# -----------------------------------
 
-if not user:
+if "user" not in st.session_state:
 
-    st.warning(
-        "Please login to continue"
+    st.session_state.user = None
+
+# -----------------------------------
+# LOGIN PAGE
+# -----------------------------------
+
+if st.session_state.user is None:
+
+    st.title("🌱 Smart Planter Login")
+
+    auth_mode = st.radio(
+
+        "Select Option",
+
+        [
+            "Login",
+            "Sign Up"
+        ]
+
     )
+
+    email = st.text_input(
+        "Email"
+    )
+
+    password = st.text_input(
+
+        "Password",
+
+        type="password"
+
+    )
+
+    # -----------------------------
+    # LOGIN
+    # -----------------------------
+
+    if auth_mode == "Login":
+
+        if st.button("Login"):
+
+            try:
+
+                user = auth.sign_in_with_email_and_password(
+
+                    email,
+
+                    password
+
+                )
+
+                st.session_state.user = user
+
+                st.rerun()
+
+            except:
+
+                st.error(
+                    "Invalid email or password"
+                )
+
+    # -----------------------------
+    # SIGN UP
+    # -----------------------------
+
+    else:
+
+        if st.button("Create Account"):
+
+            try:
+
+                auth.create_user_with_email_and_password(
+
+                    email,
+
+                    password
+
+                )
+
+                st.success(
+                    "Account created successfully!"
+                )
+
+            except:
+
+                st.error(
+                    "Failed to create account"
+                )
 
     st.stop()
 
-# -----------------------------
+# -----------------------------------
 # SIDEBAR
-# -----------------------------
+# -----------------------------------
 
 with st.sidebar:
 
@@ -78,8 +161,16 @@ with st.sidebar:
     )
 
     st.success(
-        f"Logged in as\n{user['email']}"
+        f"Logged in"
     )
+
+    # LOGOUT BUTTON
+
+    if st.button("Logout"):
+
+        st.session_state.user = None
+
+        st.rerun()
 
     selected = option_menu(
 
@@ -105,9 +196,9 @@ with st.sidebar:
         "STEM Prototype v2.1"
     )
 
-# -----------------------------
+# -----------------------------------
 # NAVIGATION
-# -----------------------------
+# -----------------------------------
 
 if selected == "Dashboard":
 
