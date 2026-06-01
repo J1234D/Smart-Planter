@@ -159,10 +159,8 @@ with st.sidebar:
     )
 
     st.success(
-        f"Logged in"
+        f"User: {st.session_state.user['email']}"
     )
-
-    # LOGOUT BUTTON
 
     if st.button("Logout"):
 
