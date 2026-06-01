@@ -39,7 +39,9 @@ config = {
 
     "messagingSenderId": "1076034199324",
 
-    "appId": "1:1076034199324:web:0ecb27cb7a81295cec24d9"
+    "appId": "1:1076034199324:web:0ecb27cb7a81295cec24d9",
+
+    "databaseURL": ""
 
 }
 
