@@ -13,9 +13,10 @@ from streamlit_autorefresh import st_autorefresh
 def load_data():
 
     try:
+        headers = {"x-api-key": st.secrets["API_KEY"]}
 
         response = requests.get(
-            "https://apiforsmartplanter.onrender.com/history"
+            "https://apiforsmartplanter.onrender.com/history",headers=headers
         )
 
         response.raise_for_status()
