@@ -55,7 +55,7 @@ with st.sidebar:
     )
 
     st.caption(
-        "STEM Prototype v2.0"
+        "STEM Prototype v2.1"
     )
 
 

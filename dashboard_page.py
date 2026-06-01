@@ -25,8 +25,13 @@ def DashPage():
     # LOAD LIVE DATA
     # -----------------------------
 
+    headers = {
+    "x-api-key": st.secrets["API_KEY"]
+}
+    
     response = requests.get(
-        "https://apiforsmartplanter.onrender.com/sensor_readings"
+        "https://apiforsmartplanter.onrender.com/sensor_readings",
+        headers=headers
     )
 
     live_data = response.json()
