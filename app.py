@@ -53,7 +53,7 @@ config = {
 
 authenticator = FirebaseAuth(config)
 
-user = authenticator.login()
+user = authenticator.check_session()
 
 # -----------------------------
 # LOGIN CHECK
