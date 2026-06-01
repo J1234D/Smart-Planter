@@ -51,9 +51,12 @@ Built with Python, IoT, and a passion for learning.
 
 
 """)
-        with col1:
-            st.image("flowchart.png",width=2500)
+    st.subheader(
+    "System Architecture"
+)
 
+    st.image("flowchart.png", use_container_width=True)
+    
     st.markdown("""<h2>Designed by Students of </h2>
     <h1 style='text-align: center; color: white;'>
         St. Stephen's School, Birati
