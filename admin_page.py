@@ -14,6 +14,8 @@ def AdminPage():
     )
 
     users = admin_auth.list_users()
+
+    count = 0
     
     for user in users.users:
         count+=1
