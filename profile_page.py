@@ -38,3 +38,23 @@ def ProfilePage(db,user):
     st.write(
         f"🔔 Notifications: {profile_data['notifications']}"
     )
+    notifications = st.toggle(
+
+    "Enable Notifications",
+
+    value=profile_data["notifications"]
+
+)
+    if notifications != profile_data["notifications"]:
+
+        db.collection("users").document(uid).update({
+
+            "notifications": notifications
+
+        })
+
+        st.success(
+            "Notification settings updated"
+        )
+
+        st.rerun()
