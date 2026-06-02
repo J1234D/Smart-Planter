@@ -37,7 +37,7 @@ def AdminPage(ADMIN_EMAILS):
         # REFRESH
         # -----------------------------
 
-        if st.button("🔄 Refresh Users"):
+        if st.button("🔄 Refresh Users",key=1):
 
             st.rerun()
 
@@ -195,7 +195,7 @@ def AdminPage(ADMIN_EMAILS):
             "📊 System Monitoring"
         )
 
-        if st.button("🔄 Refresh Users"):
+        if st.button("🔄 Refresh Users",key=2):
 
             st.rerun()
 
