@@ -155,6 +155,18 @@ if st.session_state.user is None:
     ]
 
 # -----------------------------------
+# ADMIN CHECK
+# -----------------------------------
+
+is_admin = False
+
+if st.session_state.user is not None:
+    is_admin = (
+        st.session_state.user["email"]
+        in ADMIN_EMAILS
+    )
+
+# -----------------------------------
 # SIDEBAR
 # -----------------------------------
 
