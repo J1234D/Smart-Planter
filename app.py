@@ -192,7 +192,7 @@ if st.session_state.user is None:
 
                     "email": email,
 
-                    "theme": "light",
+                    "theme": "dark",
 
                     "notifications": True,
 
