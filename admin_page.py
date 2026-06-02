@@ -16,153 +16,185 @@ def AdminPage(ADMIN_EMAILS):
     )
 
     # -----------------------------------
-    # REFRESH
+    # TABS
     # -----------------------------------
 
-    if st.button("🔄 Refresh Users"):
+    tab1, tab2 = st.tabs([
 
-        st.rerun()
+        "👥 Users",
 
-    # -----------------------------------
-    # LOAD USERS
-    # -----------------------------------
+        "📊 System"
 
-    users = admin_auth.list_users()
+    ])
 
-    count = 0
+    # ===================================
+    # USERS TAB
+    # ===================================
 
-    user_data = []
+    with tab1:
 
-    for user in users.users:
+        # -----------------------------
+        # REFRESH
+        # -----------------------------
 
-        count += 1
+        if st.button("🔄 Refresh Users"):
 
-        user_data.append({
+            st.rerun()
 
-            "Email": user.email,
+        # -----------------------------
+        # LOAD USERS
+        # -----------------------------
 
-            "UID": user.uid,
+        users = admin_auth.list_users()
 
-            "Disabled": user.disabled
+        count = 0
 
-        })
+        user_data = []
 
-    # -----------------------------------
-    # METRICS + TABLE
-    # -----------------------------------
+        for user in users.users:
 
-    st.metric(
+            count += 1
 
-        "👥 Total Users",
+            user_data.append({
 
-        count
+                "Email": user.email,
 
-    )
+                "UID": user.uid,
 
-    st.dataframe(
+                "Disabled": user.disabled
 
-        user_data,
+            })
 
-        use_container_width=True
+        # -----------------------------
+        # METRICS + TABLE
+        # -----------------------------
 
-    )
+        st.metric(
 
-    # -----------------------------------
-    # USER SELECTOR
-    # -----------------------------------
+            "👥 Total Users",
 
-    st.subheader(
-        "👤 User Controls"
-    )
+            count
 
-    selected_email = st.selectbox(
+        )
 
-        "Select User Email",
+        st.dataframe(
 
-        [user["Email"] for user in user_data]
+            user_data,
 
-    )
+            use_container_width=True
 
-    # -----------------------------------
-    # DISABLE USER
-    # -----------------------------------
+        )
 
-    if st.button("Disable User"):
+        # -----------------------------
+        # USER SELECTOR
+        # -----------------------------
 
-        if selected_email in ADMIN_EMAILS:
+        st.subheader(
+            "👤 User Controls"
+        )
 
-            st.error(
-                "Admin accounts cannot be disabled"
+        selected_email = st.selectbox(
+
+            "Select User Email",
+
+            [user["Email"] for user in user_data]
+
+        )
+
+        # -----------------------------
+        # DISABLE USER
+        # -----------------------------
+
+        if st.button("Disable User"):
+
+            if selected_email in ADMIN_EMAILS:
+
+                st.error(
+                    "Admin accounts cannot be disabled"
+                )
+
+                st.stop()
+
+            user_record = admin_auth.get_user_by_email(
+                selected_email
             )
 
-            st.stop()
+            admin_auth.update_user(
 
-        user_record = admin_auth.get_user_by_email(
-            selected_email
-        )
+                user_record.uid,
 
-        admin_auth.update_user(
+                disabled=True
 
-            user_record.uid,
-
-            disabled=True
-
-        )
-
-        st.success(
-            "User disabled successfully"
-        )
-
-        st.rerun()
-
-    # -----------------------------------
-    # ENABLE USER
-    # -----------------------------------
-
-    if st.button("Enable User"):
-
-        user_record = admin_auth.get_user_by_email(
-            selected_email
-        )
-
-        admin_auth.update_user(
-
-            user_record.uid,
-
-            disabled=False
-
-        )
-
-        st.success(
-            "User enabled successfully"
-        )
-
-        st.rerun()
-
-    # -----------------------------------
-    # DELETE USER
-    # -----------------------------------
-
-    if st.button("🗑 Delete User"):
-
-        if selected_email in ADMIN_EMAILS:
-
-            st.error(
-                "Admin accounts cannot be deleted"
             )
 
-            st.stop()
+            st.success(
+                "User disabled successfully"
+            )
 
-        user_record = admin_auth.get_user_by_email(
-            selected_email
+            st.rerun()
+
+        # -----------------------------
+        # ENABLE USER
+        # -----------------------------
+
+        if st.button("Enable User"):
+
+            user_record = admin_auth.get_user_by_email(
+                selected_email
+            )
+
+            admin_auth.update_user(
+
+                user_record.uid,
+
+                disabled=False
+
+            )
+
+            st.success(
+                "User enabled successfully"
+            )
+
+            st.rerun()
+
+        # -----------------------------
+        # DELETE USER
+        # -----------------------------
+
+        if st.button("🗑 Delete User"):
+
+            if selected_email in ADMIN_EMAILS:
+
+                st.error(
+                    "Admin accounts cannot be deleted"
+                )
+
+                st.stop()
+
+            user_record = admin_auth.get_user_by_email(
+                selected_email
+            )
+
+            admin_auth.delete_user(
+                user_record.uid
+            )
+
+            st.success(
+                "User deleted successfully"
+            )
+
+            st.rerun()
+
+    # ===================================
+    # SYSTEM TAB
+    # ===================================
+
+    with tab2:
+
+        st.subheader(
+            "📊 System Monitoring"
         )
 
-        admin_auth.delete_user(
-            user_record.uid
+        st.info(
+            "System monitoring features coming soon"
         )
-
-        st.success(
-            "User deleted successfully"
-        )
-
-        st.rerun()
