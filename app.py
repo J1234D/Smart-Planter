@@ -233,3 +233,11 @@ elif selected == "Analytics":
 elif selected == "About":
 
     AboutPage()
+
+elif selected == "Admin":
+
+    st.title("🛡 Admin Panel")
+
+    st.success(
+        "Admin access granted"
+    )
