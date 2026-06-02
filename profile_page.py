@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-def ProfilePage():
+def ProfilePage(db,user):
 
     st.title("👤 User Profile")
 
@@ -9,6 +9,32 @@ def ProfilePage():
         "Profile Settings"
     )
 
-    st.info(
-        "Profile system coming soon"
+    uid = user["localId"]
+
+    profile = (
+
+        db.collection("users")
+
+        .document(uid)
+
+        .get()
+
+    )
+
+    profile_data = profile.to_dict()
+
+    st.subheader(
+    "📄 Account Information"
+    )
+
+    st.write(
+        f"📧 Email: {profile_data['email']}"
+    )
+
+    st.write(
+        f"🎨 Theme: {profile_data['theme']}"
+    )
+
+    st.write(
+        f"🔔 Notifications: {profile_data['notifications']}"
     )

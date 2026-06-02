@@ -346,4 +346,4 @@ elif selected == "Admin":
 
 elif selected == "Profile":
 
-    ProfilePage()
+    ProfilePage(db,st.session_state.user)
