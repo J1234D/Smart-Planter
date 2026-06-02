@@ -47,7 +47,7 @@ def AdminPage():
     "🔒 Disable User"
     )
 
-    selected_uid = st.selectbox(
+    selected_email = st.selectbox(
 
         "Select User Email",
 
@@ -59,7 +59,7 @@ def AdminPage():
 
         admin_auth.update_user(
 
-            selected_uid,
+            selected_email,
 
             disabled=True
 
@@ -67,4 +67,21 @@ def AdminPage():
 
         st.success(
             "User disabled successfully"
+        )
+    if st.button("Enable User"):
+
+        user_record = admin_auth.get_user_by_email(
+        selected_email
+        )
+
+        admin_auth.update_user(
+
+        user_record.uid,
+
+        disabled=False
+
+        )
+
+        st.success(
+        "User enabled successfully"
         )
