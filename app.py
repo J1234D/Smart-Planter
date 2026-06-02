@@ -1,13 +1,17 @@
 import firebase_admin
+
 from firebase_admin import (
 
     credentials,
 
-    auth as admin_auth
+    auth as admin_auth,
+
+    firestore
 
 )
-from firebase_admin import firestore
+
 import streamlit as st
+
 import pyrebase
 
 from streamlit_option_menu import (
@@ -18,6 +22,7 @@ from dashboard_page import DashPage
 from analytics_page import AnalyticsPage
 from about_page import AboutPage
 from admin_page import AdminPage
+
 
 # -----------------------------------
 # PAGE CONFIG
@@ -65,19 +70,29 @@ firebase = pyrebase.initialize_app(
 
 auth = firebase.auth()
 
-#Firestore
-
-db = firestore.client()
-
 # -----------------------------------
 # FIREBASE ADMIN SDK
 # -----------------------------------
 
-if not firebase_admin._apps :
+if not firebase_admin._apps:
+
     cred = credentials.Certificate(
-        dict(st.secrets["firebase_admin"])
+
+        dict(
+            st.secrets["firebase_admin"]
+        )
+
     )
-    firebase_admin.initialize_app(cred)
+
+    firebase_admin.initialize_app(
+        cred
+    )
+
+# -----------------------------------
+# FIRESTORE
+# -----------------------------------
+
+db = firestore.client()
 
 # -----------------------------------
 # SESSION STATE
@@ -142,7 +157,7 @@ if st.session_state.user is None:
 
             except Exception as e:
 
-                 st.error(e)
+                st.error(e)
 
     # -----------------------------
     # SIGN UP
@@ -194,11 +209,15 @@ if st.session_state.user is None:
 
                 st.error(e)
 
+    st.stop()
 
+# -----------------------------------
+# ADMIN USERS
+# -----------------------------------
 
 ADMIN_EMAILS = [
 
-"jishnudutta2002@gmail.com"
+    "jishnudutta2002@gmail.com"
 
 ]
 
@@ -209,9 +228,13 @@ ADMIN_EMAILS = [
 is_admin = False
 
 if st.session_state.user is not None:
+
     is_admin = (
+
         st.session_state.user["email"]
+
         in ADMIN_EMAILS
+
     )
 
 # -----------------------------------
@@ -224,42 +247,64 @@ with st.sidebar:
         "🌱 Smart Planter"
     )
 
-    st.success(
-        f"User: {st.session_state.user['email']}"
-    )
+    if st.session_state.user is not None:
+
+        st.success(
+            f"User: {st.session_state.user['email']}"
+        )
+
+    # -----------------------------
+    # LOGOUT
+    # -----------------------------
 
     if st.button("Logout"):
 
         st.session_state.user = None
 
         st.rerun()
-    
-    options=[
-            "Dashboard",
-            "Analytics",
-            "About"
-        ]
 
-    icons=[
+    # -----------------------------
+    # MENU OPTIONS
+    # -----------------------------
+
+    options = [
+
+        "Dashboard",
+
+        "Analytics",
+
+        "About"
+
+    ]
+
+    icons = [
+
         "speedometer2",
+
         "graph-up",
+
         "info-circle"
-        ]
-    
+
+    ]
+
     if is_admin:
 
         options.append(
-        "Admin"
+            "Admin"
         )
 
         icons.append(
-        "shield-lock"
+            "shield-lock"
         )
 
     selected = option_menu(
-    menu_title="Main Menu",
-    options = options,
-    icons = icons
+
+        menu_title="Main Menu",
+
+        options=options,
+
+        icons=icons
+
     )
 
     st.caption(
