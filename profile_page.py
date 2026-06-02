@@ -38,6 +38,7 @@ def ProfilePage(db,user):
     st.write(
         f"🔔 Notifications: {profile_data['notifications']}"
     )
+    
     notifications = st.toggle(
 
     "Enable Notifications",
