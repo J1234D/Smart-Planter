@@ -263,4 +263,4 @@ elif selected == "Admin":
 
         st.stop()
 
-    AdminPage()
+    AdminPage(ADMIN_EMAILS)

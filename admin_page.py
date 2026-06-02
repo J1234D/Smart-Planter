@@ -1,7 +1,9 @@
 import streamlit as st
+
 from firebase_admin import auth as admin_auth
 
-def AdminPage():
+
+def AdminPage(ADMIN_EMAILS):
 
     st.title("🛡 Admin Panel")
 
@@ -13,38 +15,64 @@ def AdminPage():
         "Admin access granted"
     )
 
+    # -----------------------------------
+    # REFRESH
+    # -----------------------------------
+
     if st.button("🔄 Refresh Users"):
 
         st.rerun()
 
+    # -----------------------------------
+    # LOAD USERS
+    # -----------------------------------
+
     users = admin_auth.list_users()
 
     count = 0
+
     user_data = []
-    
+
     for user in users.users:
-        count+=1
+
+        count += 1
+
         user_data.append({
 
-        "Email": user.email,
+            "Email": user.email,
 
-        "UID": user.uid,
+            "UID": user.uid,
 
-        "Disabled": user.disabled
+            "Disabled": user.disabled
 
-    })
+        })
+
+    # -----------------------------------
+    # METRICS + TABLE
+    # -----------------------------------
 
     st.metric(
-    "👥 Total Users",
-    count
-    )
-    st.dataframe(
-    user_data,
-    use_container_width=True
+
+        "👥 Total Users",
+
+        count
+
     )
 
+    st.dataframe(
+
+        user_data,
+
+        use_container_width=True
+
+    )
+
+    # -----------------------------------
+    # USER SELECTOR
+    # -----------------------------------
+
     st.subheader(
-    "🔒 Disable User"
+        "👤 User Controls"
     )
 
     selected_email = st.selectbox(
@@ -55,11 +83,27 @@ def AdminPage():
 
     )
 
+    # -----------------------------------
+    # DISABLE USER
+    # -----------------------------------
+
     if st.button("Disable User"):
+
+        if selected_email in ADMIN_EMAILS:
+
+            st.error(
+                "Admin accounts cannot be disabled"
+            )
+
+            st.stop()
+
+        user_record = admin_auth.get_user_by_email(
+            selected_email
+        )
 
         admin_auth.update_user(
 
-            selected_email,
+            user_record.uid,
 
             disabled=True
 
@@ -68,20 +112,57 @@ def AdminPage():
         st.success(
             "User disabled successfully"
         )
+
+        st.rerun()
+
+    # -----------------------------------
+    # ENABLE USER
+    # -----------------------------------
+
     if st.button("Enable User"):
 
         user_record = admin_auth.get_user_by_email(
-        selected_email
+            selected_email
         )
 
         admin_auth.update_user(
 
-        user_record.uid,
+            user_record.uid,
 
-        disabled=False
+            disabled=False
 
         )
 
         st.success(
-        "User enabled successfully"
+            "User enabled successfully"
         )
+
+        st.rerun()
+
+    # -----------------------------------
+    # DELETE USER
+    # -----------------------------------
+
+    if st.button("🗑 Delete User"):
+
+        if selected_email in ADMIN_EMAILS:
+
+            st.error(
+                "Admin accounts cannot be deleted"
+            )
+
+            st.stop()
+
+        user_record = admin_auth.get_user_by_email(
+            selected_email
+        )
+
+        admin_auth.delete_user(
+            user_record.uid
+        )
+
+        st.success(
+            "User deleted successfully"
+        )
+
+        st.rerun()
