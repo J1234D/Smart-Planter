@@ -14,7 +14,6 @@ def AdminPage():
     )
 
     users = admin_auth.list_users()
-    st.write(users)
 
     count = 0
     user_data = []
