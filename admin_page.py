@@ -1,5 +1,5 @@
 import streamlit as st
-
+from firebase_admin import auth as admin_auth
 
 def AdminPage():
 
@@ -11,4 +11,14 @@ def AdminPage():
 
     st.success(
         "Admin access granted"
+    )
+
+    users = admin_auth.list_users()
+    
+    for user in users.users:
+        count+=1
+
+    st.metric(
+    "👥 Total Users",
+    count
     )
