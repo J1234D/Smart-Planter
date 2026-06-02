@@ -194,7 +194,7 @@ def AdminPage(ADMIN_EMAILS):
         st.subheader(
             "📊 System Monitoring"
         )
-        
+
         if st.button("🔄 Refresh Users"):
 
             st.rerun()
@@ -203,39 +203,39 @@ def AdminPage(ADMIN_EMAILS):
     "🌐 API Status"
     )
 
-    try:
+        try:
 
-        headers = {
+            headers = {
 
-            "x-api-key":
-            st.secrets["API_KEY"]
+                "x-api-key":
+                st.secrets["API_KEY"]
 
-        }
+            }
 
-        response = requests.get(
+            response = requests.get(
 
-            "https://apiforsmartplanter.onrender.com/history",
+                "https://apiforsmartplanter.onrender.com/history",
 
-            headers=headers,
+                headers=headers,
 
-            timeout=10
+                timeout=10
 
-        )
-
-        if response.status_code == 200:
-
-            st.success(
-                "✅ API Online"
             )
 
-        else:
+            if response.status_code == 200:
 
-            st.warning(
-                f"⚠ API returned {response.status_code}"
+                st.success(
+                    "✅ API Online"
+                )
+
+            else:
+
+                st.warning(
+                    f"⚠ API returned {response.status_code}"
+                )
+
+        except:
+
+            st.error(
+                "❌ API Offline"
             )
-
-    except:
-
-        st.error(
-            "❌ API Offline"
-        )
