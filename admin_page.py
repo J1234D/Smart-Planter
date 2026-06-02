@@ -13,6 +13,10 @@ def AdminPage():
         "Admin access granted"
     )
 
+    if st.button("🔄 Refresh Users"):
+
+        st.rerun()
+
     users = admin_auth.list_users()
 
     count = 0
