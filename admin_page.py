@@ -42,3 +42,29 @@ def AdminPage():
     user_data,
     use_container_width=True
     )
+
+    st.subheader(
+    "🔒 Disable User"
+    )
+
+    selected_uid = st.selectbox(
+
+        "Select User UID",
+
+        [user["Email"] for user in user_data]
+
+    )
+
+    if st.button("Disable User"):
+
+        admin_auth.update_user(
+
+            selected_uid,
+
+            disabled=True
+
+        )
+
+        st.success(
+            "User disabled successfully"
+        )
