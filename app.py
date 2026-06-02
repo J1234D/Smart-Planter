@@ -148,11 +148,11 @@ if st.session_state.user is None:
 
     st.stop()
 
-    ADMIN_EMAILS = [
+ADMIN_EMAILS = [
+    
+"jishnudutta2002@gmail.com"
 
-    "jishnudutta2002@gmail.com"
-
-    ]
+]
 
 # -----------------------------------
 # ADMIN CHECK
