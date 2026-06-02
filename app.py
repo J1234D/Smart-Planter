@@ -162,15 +162,39 @@ if st.session_state.user is None:
 
                 )
 
+                firebase_user = auth.sign_in_with_email_and_password(
+
+                    email,
+
+                    password
+
+                )
+
+                uid = firebase_user["localId"]
+
+                db.collection("users").document(uid).set({
+
+                    "email": email,
+
+                    "theme": "light",
+
+                    "notifications": True,
+
+                    "profile_picture": "",
+
+                    "created_at": firestore.SERVER_TIMESTAMP
+
+                })
+
                 st.success(
                     "Account created successfully! Now please log in."
                 )
 
             except Exception as e:
 
-                 st.error(e)
+                st.error(e)
 
-    st.stop()
+
 
 ADMIN_EMAILS = [
 
