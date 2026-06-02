@@ -194,6 +194,10 @@ def AdminPage(ADMIN_EMAILS):
         st.subheader(
             "📊 System Monitoring"
         )
+        
+        if st.button("🔄 Refresh Users"):
+
+            st.rerun()
 
         st.subheader(
     "🌐 API Status"
@@ -214,7 +218,7 @@ def AdminPage(ADMIN_EMAILS):
 
             headers=headers,
 
-            timeout=5
+            timeout=10
 
         )
 
