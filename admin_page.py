@@ -49,7 +49,7 @@ def AdminPage():
 
     selected_uid = st.selectbox(
 
-        "Select User UID",
+        "Select User Email",
 
         [user["Email"] for user in user_data]
 
