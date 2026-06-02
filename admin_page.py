@@ -1,5 +1,5 @@
 import streamlit as st
-
+import requests
 from firebase_admin import auth as admin_auth
 
 
@@ -195,6 +195,43 @@ def AdminPage(ADMIN_EMAILS):
             "📊 System Monitoring"
         )
 
-        st.info(
-            "System monitoring features coming soon"
+        st.subheader(
+    "🌐 API Status"
+)
+
+try:
+
+    headers = {
+
+        "x-api-key":
+        st.secrets["API_KEY"]
+
+    }
+
+    response = requests.get(
+
+        "https://apiforsmartplanter.onrender.com/history",
+
+        headers=headers,
+
+        timeout=5
+
+    )
+
+    if response.status_code == 200:
+
+        st.success(
+            "✅ API Online"
         )
+
+    else:
+
+        st.warning(
+            f"⚠ API returned {response.status_code}"
+        )
+
+except:
+
+    st.error(
+        "❌ API Offline"
+    )
