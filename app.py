@@ -6,6 +6,7 @@ from firebase_admin import (
     auth as admin_auth
 
 )
+from firebase_admin import firestore
 import streamlit as st
 import pyrebase
 
@@ -63,6 +64,10 @@ firebase = pyrebase.initialize_app(
 )
 
 auth = firebase.auth()
+
+#Firestore
+
+db = firestore.client()
 
 # -----------------------------------
 # FIREBASE ADMIN SDK
