@@ -236,6 +236,14 @@ elif selected == "About":
 
 elif selected == "Admin":
 
+    if not is_admin:
+
+        st.error(
+            "Unauthorized Access"
+        )
+
+        st.stop()
+
     st.title("🛡 Admin Panel")
 
     st.success(
