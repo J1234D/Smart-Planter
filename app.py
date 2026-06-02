@@ -1,3 +1,11 @@
+import firebase_admin
+from firebase_admin import (
+
+    credentials,
+
+    auth as admin_auth
+
+)
 import streamlit as st
 import pyrebase
 
@@ -8,6 +16,7 @@ from streamlit_option_menu import (
 from dashboard_page import DashPage
 from analytics_page import AnalyticsPage
 from about_page import AboutPage
+from admin_page import AdminPage
 
 # -----------------------------------
 # PAGE CONFIG
@@ -54,6 +63,16 @@ firebase = pyrebase.initialize_app(
 )
 
 auth = firebase.auth()
+
+# -----------------------------------
+# FIREBASE ADMIN SDK
+# -----------------------------------
+
+if not firebase_admin._apps :
+    cred = credentials.Certificate(
+        dict(st.secrets["firebase_admin"])
+    )
+    firebase_admin.initialize_app()
 
 # -----------------------------------
 # SESSION STATE
@@ -244,8 +263,4 @@ elif selected == "Admin":
 
         st.stop()
 
-    st.title("🛡 Admin Panel")
-
-    st.success(
-        "Admin access granted"
-    )
+    
