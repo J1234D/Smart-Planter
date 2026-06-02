@@ -197,41 +197,41 @@ def AdminPage(ADMIN_EMAILS):
 
         st.subheader(
     "🌐 API Status"
-)
-
-try:
-
-    headers = {
-
-        "x-api-key":
-        st.secrets["API_KEY"]
-
-    }
-
-    response = requests.get(
-
-        "https://apiforsmartplanter.onrender.com/history",
-
-        headers=headers,
-
-        timeout=5
-
     )
 
-    if response.status_code == 200:
+    try:
 
-        st.success(
-            "✅ API Online"
+        headers = {
+
+            "x-api-key":
+            st.secrets["API_KEY"]
+
+        }
+
+        response = requests.get(
+
+            "https://apiforsmartplanter.onrender.com/history",
+
+            headers=headers,
+
+            timeout=5
+
         )
 
-    else:
+        if response.status_code == 200:
 
-        st.warning(
-            f"⚠ API returned {response.status_code}"
+            st.success(
+                "✅ API Online"
+            )
+
+        else:
+
+            st.warning(
+                f"⚠ API returned {response.status_code}"
+            )
+
+    except:
+
+        st.error(
+            "❌ API Offline"
         )
-
-except:
-
-    st.error(
-        "❌ API Offline"
-    )
