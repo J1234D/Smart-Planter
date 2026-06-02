@@ -16,11 +16,25 @@ def AdminPage():
     users = admin_auth.list_users()
 
     count = 0
+    user_data = []
     
     for user in users.users:
         count+=1
+        user_data.append({
+
+        "Email": user.email,
+
+        "UID": user.uid,
+
+        "Disabled": user.disabled
+
+    })
 
     st.metric(
     "👥 Total Users",
     count
+    )
+    st.dataframe(
+    user_data,
+    use_container_width=True
     )
