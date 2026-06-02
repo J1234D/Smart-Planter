@@ -149,7 +149,7 @@ if st.session_state.user is None:
     st.stop()
 
 ADMIN_EMAILS = [
-    
+
 "jishnudutta2002@gmail.com"
 
 ]
@@ -185,29 +185,37 @@ with st.sidebar:
         st.session_state.user = None
 
         st.rerun()
-
-    selected = option_menu(
-
-        menu_title="Main Menu",
-
-        options=[
+    
+    options=[
             "Dashboard",
             "Analytics",
             "About"
-        ],
+        ]
 
-        icons=[
-            "speedometer2",
-            "graph-up",
-            "info-circle"
-        ],
+    icons=[
+        "speedometer2",
+        "graph-up",
+        "info-circle"
+        ]
+    
+    if is_admin:
 
-        default_index=0
+        options.append(
+        "Admin"
+        )
 
+        icons.append(
+        "shield-lock"
+        )
+
+    selected = option_menu(
+    menu_title="Main Menu",
+    options = options,
+    icons = icons
     )
 
     st.caption(
-        "STEM Prototype v2.1"
+        "STEM Prototype v2.2"
     )
 
 # -----------------------------------
