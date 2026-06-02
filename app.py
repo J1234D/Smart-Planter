@@ -139,7 +139,7 @@ if st.session_state.user is None:
                 )
 
                 st.success(
-                    "Account created successfully!"
+                    "Account created successfully! Now please log in."
                 )
 
             except Exception as e:
@@ -147,6 +147,12 @@ if st.session_state.user is None:
                  st.error(e)
 
     st.stop()
+
+    ADMIN_EMAILS = [
+
+    "jishnudutta2002@gmail.com"
+
+    ]
 
 # -----------------------------------
 # SIDEBAR

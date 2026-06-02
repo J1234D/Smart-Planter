@@ -3,6 +3,8 @@ PLANT_RULES = {
     "aloe_vera": {
 
         "min_moisture": 20,
+        "max_moisture": 60,
+
         "min_ph": 6.0,
         "max_ph": 7.5
 
@@ -11,6 +13,8 @@ PLANT_RULES = {
     "tomato": {
 
         "min_moisture": 50,
+        "max_moisture": 80,
+
         "min_ph": 5.5,
         "max_ph": 6.8
 
@@ -19,12 +23,14 @@ PLANT_RULES = {
     "rose": {
 
         "min_moisture": 40,
+        "max_moisture": 75,
+
         "min_ph": 6.0,
         "max_ph": 7.0
 
     }
-}
 
+}
 
 def get_plant_status(
     plant_type,
@@ -40,6 +46,12 @@ def get_plant_status(
 
         issues.append(
             "💧 Needs Water"
+        )
+    
+    elif moisture > rules["max_moisture"]:
+
+        issues.append(
+        "💧 Too Much Water"
         )
 
     if ph < rules["min_ph"]:
