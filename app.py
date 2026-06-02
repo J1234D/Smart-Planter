@@ -22,6 +22,7 @@ from dashboard_page import DashPage
 from analytics_page import AnalyticsPage
 from about_page import AboutPage
 from admin_page import AdminPage
+from profile_page import ProfilePage
 
 
 # -----------------------------------
@@ -273,6 +274,8 @@ with st.sidebar:
 
         "Analytics",
 
+        "Profile",
+
         "About"
 
     ]
@@ -282,6 +285,8 @@ with st.sidebar:
         "speedometer2",
 
         "graph-up",
+
+        "person-circle",
 
         "info-circle"
 
@@ -338,3 +343,7 @@ elif selected == "Admin":
         st.stop()
 
     AdminPage(ADMIN_EMAILS)
+
+elif selected == "Profile":
+
+    ProfilePage()
